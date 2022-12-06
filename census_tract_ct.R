@@ -116,9 +116,20 @@ hist(data_of_interest_tract$prop.no_int)
 
 
 
+##################################
+## MERGING WITH EJSCREEN DATASET
+##################################
 
 
 
+# Save data from above separately (just in case!)
+data_copy <- data_of_interest_tract
+
+# NOTE: this file is currently local to my computer... is there a Dropbox I should upload it to? 
+ejscreen <- read_csv("/Users/spencerblackwood/Downloads/1.0-communities.csv", col_types = list(`Number of Tribal areas within Census tract for Alaska` = "d"))
+names(ejscreen)[1] <- "GEOID"
+ejscreen <- ejscreen %>% select(-c('County Name', 'State/Territory'))
+data_of_interest_tract <- data_of_interest_tract %>% merge(ejscreen, by = "GEOID")
 
 
 
